@@ -11,7 +11,7 @@
  * Créé le 23 août 2019.
  * </p>
  */
-package services.impl;
+package utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,9 +26,8 @@ import entities.Mountain;
 import entities.Player;
 import entities.Treasure;
 import exception.MapException;
-import services.ExtractElementsFromFileService;
 
-public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFileService {
+public final class ExtractElementsFromFile {
 
 	/**
 	 * Récupère les lignes du fichier texte et les stocke dans une liste
@@ -36,7 +35,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 	 * @return La liste contenant les lignes du fichier
 	 * @throws MapException
 	 */
-	private List<String> extractFileLinesWithoutSpaces(String filePath) throws MapException {
+	private static List<String> extractFileLinesWithoutSpaces(String filePath) throws MapException {
 		List<String> lines = new ArrayList<>();
 		try (FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr);) {
 			String line = null;
@@ -50,8 +49,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 		return lines;
 	}
 
-	@Override
-	public List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
+	public static List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
 
 		List<MapObject> mapObjects = new ArrayList<>();
 		List<String> mapLines = extractFileLinesWithoutSpaces(filePath);
@@ -65,7 +63,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 		return mapObjects;
 	}
 
-	private MapObject getMapObject(String line) {
+	private static MapObject getMapObject(String line) {
 
 		String[] params = line.split("-");
 		if (MapConstants.OBJECTS_IDENTIFIER.contains(params[0]) && null != getMapObjectTypeFromKey(params)) {
@@ -75,7 +73,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 		}
 	}
 
-	private MapObject getMapObjectTypeFromKey(String[] params) {
+	private static MapObject getMapObjectTypeFromKey(String[] params) {
 		switch (params[0]) {
 		case "C":
 			return new Map().verifyParamsAndReturnObject(params);

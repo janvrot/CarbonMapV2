@@ -24,5 +24,13 @@ public abstract class MapObject {
 	protected VerifyParametersService verifyParameters = new VerifyParametersServiceImpl();
 	
 	public abstract MapObject verifyParamsAndReturnObject(String[] params);
+
+	public int getxPos() {
+		return xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
 }
 

@@ -14,30 +14,28 @@
 package entities;
 
 public class Treasure extends MapObject {
-	
+
 	private int treasureNumber;
-	
-	public void removeTreasure() {
-		
-	}
-	
+
 	public Treasure(int xPos, int yPos, int treasureNumber) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.treasureNumber = treasureNumber;
 	}
-	
+
 	public Treasure() {
-		
+
+	}
+
+	public void removeTreasure() {
+
 	}
 
 	@Override
 	public MapObject verifyParamsAndReturnObject(String[] params) {
-		if(verifyParameters.checkNumberParameters(4, params) 
-				&& verifyParameters.isNumericAndPositive(params[1]) 
-				&& verifyParameters.isNumericAndPositive(params[2])
-				&& verifyParameters.isNumericAndPositive(params[3])) 
-		return new Treasure(Integer.parseInt(params[1]), Integer.parseInt(params[2]), Integer.parseInt(params[3]));
+		if (verifyParameters.checkNumberParameters(4, params) && verifyParameters.isNumericAndPositive(params[1])
+				&& verifyParameters.isNumericAndPositive(params[2]) && verifyParameters.isNumericAndPositive(params[3]))
+			return new Treasure(Integer.parseInt(params[1]), Integer.parseInt(params[2]), Integer.parseInt(params[3]));
 		else
 			return null;
 	}
