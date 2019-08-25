@@ -13,11 +13,16 @@
  */
 package entities;
 
+import services.VerifyParametersService;
+import services.impl.VerifyParametersServiceImpl;
+
 public abstract class MapObject {
+
+	protected int xPos;
+	protected int yPos;
 	
-	private int xPos;
-	private int yPos;
+	protected VerifyParametersService verifyParameters = new VerifyParametersServiceImpl();
 	
-	public abstract <T extends MapObject> T verifyParamsAndReturnObject(String[] params);
+	public abstract MapObject verifyParamsAndReturnObject(String[] params);
 }
 

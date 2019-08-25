@@ -13,12 +13,25 @@
  */
 package entities;
 
-public class Map extends MapObject{
+public class Map extends MapObject {
+
+	public Map(int xPos, int yPos) {
+		this.xPos = xPos;
+		this.yPos = yPos;
+	}
+	
+	public Map() {
+		
+	}
 
 	@Override
-	public <T extends MapObject> T verifyParamsAndReturnObject(String[] params) {
-		return null;
+	public MapObject verifyParamsAndReturnObject(String[] params) {
+		if(verifyParameters.checkNumberParameters(3, params) 
+				&& verifyParameters.isNumericAndMoreThanZero(params[1]) 
+				&& verifyParameters.isNumericAndMoreThanZero(params[2])) 
+		return new Map(Integer.parseInt(params[1]), Integer.parseInt(params[2]));
+		else
+			return null;
 	}
 
 }
-

@@ -38,8 +38,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 	 */
 	private List<String> extractFileLinesWithoutSpaces(String filePath) throws MapException {
 		List<String> lines = new ArrayList<>();
-		try (FileReader fr = new FileReader(filePath);
-				BufferedReader br = new BufferedReader(fr);) {
+		try (FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr);) {
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
@@ -52,16 +51,21 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 	}
 
 	@Override
-	public List<? extends MapObject> getMapObjectsFromFile(String filePath) throws MapException {
+	public List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
 
-		List<? extends MapObject> mapObjects = new ArrayList<>();
+		List<MapObject> mapObjects = new ArrayList<>();
 		List<String> mapLines = extractFileLinesWithoutSpaces(filePath);
 
-		mapLines.forEach(line -> mapObjects.add(getMapObject(line)));
+		mapLines.forEach(line -> {
+			MapObject object = getMapObject(line);
+			if (object != null) {
+				mapObjects.add(object);
+			}
+		});
 		return mapObjects;
 	}
 
-	private <T extends MapObject> T getMapObject(String line) {
+	private MapObject getMapObject(String line) {
 
 		String[] params = line.split("-");
 		if (MapConstants.OBJECTS_IDENTIFIER.contains(params[0]) && null != getMapObjectTypeFromKey(params)) {
@@ -71,7 +75,7 @@ public class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFi
 		}
 	}
 
-	private <T extends MapObject> T getMapObjectTypeFromKey(String[] params) {
+	private MapObject getMapObjectTypeFromKey(String[] params) {
 		switch (params[0]) {
 		case "C":
 			return new Map().verifyParamsAndReturnObject(params);

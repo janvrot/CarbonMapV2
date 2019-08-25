@@ -33,5 +33,7 @@ public final class MapConstants {
 	public static final List<String> ORIENTATIONS = Arrays.asList("N", "E", "S", "W");
 	
 	public static final List<String> OBJECTS_IDENTIFIER = Arrays.asList("C", "M", "T", "A");
+	
+	public static final List<String> MOVEMENTS  = Arrays.asList("A", "D", "G");
 }
 

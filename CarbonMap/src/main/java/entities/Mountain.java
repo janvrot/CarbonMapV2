@@ -15,10 +15,25 @@ package entities;
 
 public class Mountain extends MapObject {
 
-	@Override
-	public <T extends MapObject> T verifyParamsAndReturnObject(String[] params) {
-		return null;
+	public Mountain(int xPos, int yPos) {
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
+	
+	public Mountain() {
+		
+	}
+
+	@Override
+	public MapObject verifyParamsAndReturnObject(String[] params) {
+		if(verifyParameters.checkNumberParameters(3, params) 
+				&& verifyParameters.isNumericAndPositive(params[1]) 
+				&& verifyParameters.isNumericAndPositive(params[2])) 
+		return new Mountain(Integer.parseInt(params[1]), Integer.parseInt(params[2]));
+		else
+			return null;
+	}
+
 
 }
 

@@ -29,6 +29,6 @@ public interface ExtractElementsFromFileService {
 	 * 		la liste contenant tous les objets présents sur la carte
 	 * @throws MapException
 	 */
-	public List<? extends MapObject> getMapObjectsFromFile(String filePath) throws MapException;
+	public List<MapObject> getMapObjectsFromFile(String filePath) throws MapException;
 }
 
