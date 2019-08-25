@@ -41,12 +41,33 @@ public class Player extends MapObject {
 
 	}
 
-	public void move(String orientation) {
-
+	public void turn(String orientation, String movement) {
+		int position = getOrientationPosition(orientation);
+		if (movement.equals("D")) {
+			position++;
+		} else {
+			position --;
+		}
+		orientation = checkOrientation(position);
 	}
 
-	public void move(String orientation, String direction) {
-
+	public void move(String orientation) {
+		switch (orientation) {
+		case "N":
+			yPos = yPos + 1;
+			break;
+		case "E":
+			xPos = xPos + 1;
+			break;
+		case "S":
+			yPos = yPos - 1;
+			break;
+		case "W":
+			xPos = xPos - 1;
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -60,6 +81,31 @@ public class Player extends MapObject {
 					0);
 		else
 			return null;
+	}
+	
+	private int getOrientationPosition(String orientation) {
+		int position = 0;
+		for(int i = 0;i<MapConstants.ORIENTATIONS.size();i++) {
+			if (MapConstants.ORIENTATIONS.get(i).equals(orientation)) {
+				position = i;
+				break;
+			}
+		}
+		return position;
+	}
+	
+	private String checkOrientation(int position) {
+		if (position >= MapConstants.ORIENTATIONS.size()) {
+			return MapConstants.ORIENTATIONS.get(0);
+		} else if (position < 0) {
+			return MapConstants.ORIENTATIONS.get(MapConstants.ORIENTATIONS.size() - 1);
+		} else {
+			return MapConstants.ORIENTATIONS.get(position);
+		}
+	}
+	
+	public String getMovements() {
+		return movements;
 	}
 
 }

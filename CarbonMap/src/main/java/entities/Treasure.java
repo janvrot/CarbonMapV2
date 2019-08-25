@@ -28,7 +28,7 @@ public class Treasure extends MapObject {
 	}
 
 	public void removeTreasure() {
-
+		treasureNumber = treasureNumber - 1;
 	}
 
 	@Override
