@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import entities.Map;
 import entities.MapObject;
+import entities.Player;
+import entities.Treasure;
+import exception.MapException;
 
 public final class CheckIfAllIsGood {
 
@@ -13,12 +16,13 @@ public final class CheckIfAllIsGood {
 
 	}
 
-	public static List<MapObject> getFinalList(List<MapObject> objects) {
+	public static List<MapObject> getFinalList(List<MapObject> objects) throws MapException {
 		Map map = checkMap(objects);
-		if (map != null) {
-			return checkIfIsInMap(map, objects);
+		List<MapObject> finalMap = checkIfIsInMap(map, objects);
+		if (map != null && !finalMap.isEmpty()) {
+			return finalMap;
 		} else
-			return Collections.emptyList();
+			throw new MapException("Il manque des elements pour demarrer la partie");
 	}
 
 	private static Map checkMap(List<MapObject> objects) {
@@ -29,8 +33,33 @@ public final class CheckIfAllIsGood {
 
 	private static List<MapObject> checkIfIsInMap(Map map, List<MapObject> mapObjects) {
 
-		return mapObjects.stream().filter(mapObject -> !(mapObject instanceof Map))
+		List<MapObject> objects = mapObjects.stream().filter(mapObject -> !(mapObject instanceof Map))
 				.filter(mapObject -> mapObject.getxPos() < map.getxPos() && mapObject.getyPos() < map.getyPos())
 				.collect(Collectors.toList());
+		
+		if (containsPlayersAndTreasures(objects)) {
+			return objects;
+		} else {
+			return Collections.emptyList();
+		}
+			
+	}
+	
+	private static boolean containsPlayersAndTreasures(List<MapObject> objects) {
+		
+		boolean treasure = false;
+		boolean player = false;
+		
+		for(MapObject obj: objects) {
+			if (obj instanceof Treasure)
+				treasure = true;
+			if (obj instanceof Player)
+				player = true;
+		}
+		
+		if (treasure && player)
+			return true;
+		else
+			return false;
 	}
 }
