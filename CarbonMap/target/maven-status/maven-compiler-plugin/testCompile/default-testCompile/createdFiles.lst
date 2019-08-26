@@ -1,1 +1,5 @@
-MapGenTest.class
+CheckIfAllIsGoodServiceTest.class
+GameTest.class
+WriteExitServiceTest.class
+ActionServiceTest.class
+ExtractElementsFromFileServiceTest.class
