@@ -1,16 +1,4 @@
-/**
- * <p>
- * Copyright © 2019 THALES Communications, France. All rights reserved.
- * </p>
- * <p>
- * Ce document est la propriété de THALES Communications, France,
- * il ne peut être ni reproduit, ni utilisé, ni communiqué, ni distribué
- * à  des tiers sans son autorisation préalable.
- * </p>
- * <p>
- * Créé le 23 août 2019.
- * </p>
- */
+
 package services.impl;
 
 import java.io.BufferedReader;
@@ -28,6 +16,12 @@ import entities.Treasure;
 import exception.MapException;
 import services.ExtractElementsFromFileService;
 
+/**
+ * Extrait les elements du fichier d'entree
+ * 
+ * @author antoinejanvrot
+ *
+ */
 public final class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFileService {
 
 	/**
@@ -50,6 +44,10 @@ public final class ExtractElementsFromFileServiceImpl implements ExtractElements
 		return lines;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
 
@@ -65,6 +63,12 @@ public final class ExtractElementsFromFileServiceImpl implements ExtractElements
 		return mapObjects;
 	}
 
+	/**
+	 * Recupere un objet
+	 * 
+	 * @param line la ligne contenant les infos de l'objet
+	 * @return l'objet trouve
+	 */
 	private MapObject getMapObject(String line) {
 
 		String[] params = line.split("-");
@@ -75,6 +79,12 @@ public final class ExtractElementsFromFileServiceImpl implements ExtractElements
 		}
 	}
 
+	/**
+	 * Genere un objet sur la carte
+	 * 
+	 * @param params les parametres trouves dans le fichier
+	 * @return l'objet genere
+	 */
 	private MapObject getMapObjectTypeFromKey(String[] params) {
 		switch (params[0]) {
 		case "C":

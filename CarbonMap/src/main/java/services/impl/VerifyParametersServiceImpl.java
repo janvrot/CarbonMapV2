@@ -5,13 +5,27 @@ import java.util.List;
 
 import services.VerifyParametersService;
 
+/**
+ * Implemetation du VerifyParametersService
+ * 
+ * @author antoinejanvrot
+ *
+ */
 public class VerifyParametersServiceImpl implements VerifyParametersService {
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean checkNumberParameters(int number, String[] params) {
 		return params.length == number;
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isNumericAndMoreThanZero(String param) {
 		try {
@@ -21,7 +35,11 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isNumericAndPositive(String param) {
 		try {
@@ -32,6 +50,10 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean hasValuesIncludedInDefaultValues(String param, List<String> defaultValues) {
 		if (param.length() > 0) {
@@ -42,6 +64,10 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isNotEmptyString(String param) {
 		return param.length() > 0;

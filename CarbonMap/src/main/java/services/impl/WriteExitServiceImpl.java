@@ -20,15 +20,27 @@ import java.util.List;
 
 import entities.MapObject;
 import exception.MapException;
+import services.WriteExitService;
 import utils.Game;
 
-public class WriteExitServiceImpl implements services.WriteExitService {
+/**
+ * Implementation du WriteExitService
+ * 
+ * @author antoinejanvrot
+ *
+ */
+public class WriteExitServiceImpl implements WriteExitService {
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void generateExitFile(Game game) throws MapException {
 		if (game.getMap() != null) {
 			String str = getFinalString(game);
-			try (FileWriter fileWriter = new FileWriter("src/main/resources/End.txt"); BufferedWriter writer = new BufferedWriter(fileWriter);) {
+			try (FileWriter fileWriter = new FileWriter("src/main/resources/End.txt");
+					BufferedWriter writer = new BufferedWriter(fileWriter);) {
 				writer.write(str);
 			} catch (IOException ex) {
 				throw new MapException();
@@ -36,6 +48,12 @@ public class WriteExitServiceImpl implements services.WriteExitService {
 		}
 	}
 
+	/**
+	 * Recupere les informations a ecrire dans le fichier de sortie
+	 * 
+	 * @param game les donnees de fin de partie
+	 * @return le texte a ecrire
+	 */
 	private String getFinalString(Game game) {
 		StringBuilder finalString = new StringBuilder();
 		List<MapObject> finalList = game.getGenericList();
@@ -45,4 +63,3 @@ public class WriteExitServiceImpl implements services.WriteExitService {
 		return finalString.toString();
 	}
 }
-

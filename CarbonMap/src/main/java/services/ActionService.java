@@ -1,16 +1,3 @@
-/**
- * <p>
- * Copyright © 2019 THALES Communications, France. All rights reserved.
- * </p>
- * <p>
- * Ce document est la propriété de THALES Communications, France,
- * il ne peut être ni reproduit, ni utilisé, ni communiqué, ni distribué
- * à  des tiers sans son autorisation préalable.
- * </p>
- * <p>
- * Créé le 26 août 2019.
- * </p>
- */
 package services;
 
 import java.util.List;
@@ -20,10 +7,31 @@ import entities.Mountain;
 import entities.Player;
 import entities.Treasure;
 
+/**
+ * Verification si les actions sont possibles
+ * 
+ * @author antoinejanvrot
+ *
+ */
 public interface ActionService {
 
+	/**
+	 * Verifie si il y a un obstacle
+	 * 
+	 * @param player    l'aventurier
+	 * @param mountains les montagnes
+	 * @param players   les avnturiers
+	 * @param map       la carte
+	 * @return la verification
+	 */
 	public boolean checkObstacle(Player player, List<Mountain> mountains, List<Player> players, Map map);
-	
+
+	/**
+	 * Verifie les tresors restants apres passage du joueur
+	 * 
+	 * @param player    le joueur
+	 * @param treasures les tresors
+	 * @return les tresors restants
+	 */
 	public List<Treasure> treasuresLeft(Player player, List<Treasure> treasures);
 }
-

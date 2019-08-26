@@ -1,16 +1,4 @@
-/**
- * <p>
- * Copyright © 2019 THALES Communications, France. All rights reserved.
- * </p>
- * <p>
- * Ce document est la propriété de THALES Communications, France,
- * il ne peut être ni reproduit, ni utilisé, ni communiqué, ni distribué
- * à  des tiers sans son autorisation préalable.
- * </p>
- * <p>
- * Créé le 23 août 2019.
- * </p>
- */
+
 package entities;
 
 /**
@@ -24,10 +12,8 @@ public class Map extends MapObject {
 	/**
 	 * Constructeur avec paramètres
 	 * 
-	 * @param xPos
-	 *            Les coordonnées en abscisse
-	 * @param yPos
-	 *            Les coordonnées en ordonnée
+	 * @param xPos Les coordonnées en abscisse
+	 * @param yPos Les coordonnées en ordonnée
 	 */
 	public Map(int xPos, int yPos) {
 		this.xPos = xPos;
