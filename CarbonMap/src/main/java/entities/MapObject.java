@@ -46,6 +46,14 @@ public abstract class MapObject {
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
 	}
+	
+	/**
+	 * @param verifyParameters
+	 *            {@link #verifyParameters}
+	 */
+	public void setVerifyParameters(VerifyParametersService verifyParameters) {
+		this.verifyParameters = verifyParameters;
+	}
 
 	/**
 	 * @param yPos

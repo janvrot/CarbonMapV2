@@ -16,8 +16,21 @@ package services;
 import exception.MapException;
 import utils.Game;
 
+/**
+ * Ecriture du fichier de sortie
+ * 
+ * @author antoinejanvrot
+ *
+ */
 public interface WriteExitService {
 
-	public void generateExitFile(Game game) throws MapException;
+	/**
+	 * Ecriture du fichier de sortie
+	 * 
+	 * @param game
+	 * 		le resultat de la partie
+	 * @throws MapException
+	 */
+	public void generateExitFile(Game game, String filePath) throws MapException;
 }
 

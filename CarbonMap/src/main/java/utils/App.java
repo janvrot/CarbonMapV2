@@ -23,6 +23,6 @@ public class App {
 	public static void main(String[] args) throws MapException {
 		Game game = parameters.getFinalList(mapObjects.getMapObjectsFromFile(MapConstants.DEFAULT_FILE_PATH));
 		game.playGame();
-		writeExit.generateExitFile(game);
+		writeExit.generateExitFile(game, "src/main/resources/End.txt");
 	}
 }

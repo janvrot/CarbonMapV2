@@ -36,15 +36,17 @@ public class WriteExitServiceImpl implements WriteExitService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void generateExitFile(Game game) throws MapException {
+	public void generateExitFile(Game game, String filePath) throws MapException {
 		if (game.getMap() != null) {
 			String str = getFinalString(game);
-			try (FileWriter fileWriter = new FileWriter("src/main/resources/End.txt");
+			try (FileWriter fileWriter = new FileWriter(filePath);
 					BufferedWriter writer = new BufferedWriter(fileWriter);) {
 				writer.write(str);
 			} catch (IOException ex) {
-				throw new MapException();
+				throw new MapException("Probleme lors de l'ecriture du fichier");
 			}
+		} else {
+			throw new MapException("Aucune carte n'a ete trouvee");
 		}
 	}
 
