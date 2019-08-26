@@ -17,7 +17,7 @@ import services.impl.WriteExitServiceImpl;
 import utils.Game;
 
 public class WriteExitServiceTest {
-	
+
 	private WriteExitService writeFile = new WriteExitServiceImpl();
 	private ExtractElementsFromFileService extractFile = new ExtractElementsFromFileServiceImpl();
 
@@ -33,14 +33,14 @@ public class WriteExitServiceTest {
 		} catch (MapException mex) {
 			assertTrue(mex.getMessage().equals("Aucune carte n'a ete trouvee"));
 		}
-		
+
 		Game game2 = new Game(map, mountains, treasures, players);
 		try {
 			writeFile.generateExitFile(game2, "src/test/resources/End.txt");
 			assertTrue(extractFile.getMapObjectsFromFile("src/test/resources/End.txt").size() == 3);
-			
+
 		} catch (MapException mex) {
-			
+
 		}
 	}
 

@@ -27,10 +27,8 @@ public interface WriteExitService {
 	/**
 	 * Ecriture du fichier de sortie
 	 * 
-	 * @param game
-	 * 		le resultat de la partie
+	 * @param game le resultat de la partie
 	 * @throws MapException
 	 */
 	public void generateExitFile(Game game, String filePath) throws MapException;
 }
-

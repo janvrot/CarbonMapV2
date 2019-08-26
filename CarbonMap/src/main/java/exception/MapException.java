@@ -24,20 +24,19 @@ public class MapException extends Exception {
 	/**
 	 * Ctor with message parameter.
 	 *
-	 * @param message
-	 *            the message of the exception.
+	 * @param message the message of the exception.
 	 */
 	public MapException(final String message) {
 		super(message);
 	}
-	
+
 	/**
 	 * Ctor with message parameter.
+	 * 
 	 * @param message the message of the exception.
-	 * @param e originating exception
+	 * @param e       originating exception
 	 */
 	public MapException(final String message, Throwable e) {
 		super(message, e);
 	}
 }
-

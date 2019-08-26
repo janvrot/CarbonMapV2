@@ -21,10 +21,10 @@ public class GameTest {
 		List<Mountain> mountains = Arrays.asList(new Mountain(1, 0), new Mountain(2, 1));
 		List<Treasure> treasures = Arrays.asList(new Treasure(0, 3, 2), new Treasure(1, 3, 3));
 		Game game = new Game(map, mountains, treasures, players);
-		
+
 		game.playGame();
 		List<MapObject> finalObjects = game.getGenericList();
-		
+
 		assertTrue(finalObjects.size() == 5);
 	}
 

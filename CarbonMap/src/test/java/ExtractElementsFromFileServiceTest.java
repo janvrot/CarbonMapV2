@@ -10,7 +10,7 @@ import services.ExtractElementsFromFileService;
 import services.impl.ExtractElementsFromFileServiceImpl;
 
 public class ExtractElementsFromFileServiceTest {
-	
+
 	private ExtractElementsFromFileService extractElementsFromFileService = new ExtractElementsFromFileServiceImpl();
 
 	@Test
@@ -20,13 +20,14 @@ public class ExtractElementsFromFileServiceTest {
 		} catch (MapException mex) {
 			assertTrue(mex.getMessage().equals("Un problème est survenu à la lecture du fichier"));
 		}
-		
+
 		try {
-			List<MapObject> mapObject = extractElementsFromFileService.getMapObjectsFromFile("src/test/resources/Map.txt");
+			List<MapObject> mapObject = extractElementsFromFileService
+					.getMapObjectsFromFile("src/test/resources/Map.txt");
 			assertFalse(mapObject.isEmpty());
 			assertTrue(mapObject.size() == 6);
 		} catch (MapException mex) {
-			
+
 		}
 	}
 
