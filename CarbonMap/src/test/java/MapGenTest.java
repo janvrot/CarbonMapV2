@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import exception.MapException;
-import utils.ExtractElementsFromFile;
+import services.impl.ExtractElementsFromFileServiceImpl;
 
 /**
  * <p>

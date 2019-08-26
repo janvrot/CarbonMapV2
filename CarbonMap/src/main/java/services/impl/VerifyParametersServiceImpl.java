@@ -9,20 +9,14 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 
 	@Override
 	public boolean checkNumberParameters(int number, String[] params) {
-		if (params.length != number)
-			return false;
-		else
-			return true;
+		return params.length == number;
 	}
 
 	@Override
 	public boolean isNumericAndMoreThanZero(String param) {
 		try {
 			int coordinate = Integer.parseInt(param);
-			if (coordinate > 0)
-				return true;
-			else
-				return false;
+			return coordinate > 0;
 		} catch (NumberFormatException | NullPointerException nfe) {
 			return false;
 		}
@@ -32,10 +26,7 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 	public boolean isNumericAndPositive(String param) {
 		try {
 			int coordinate = Integer.parseInt(param);
-			if (coordinate >= 0)
-				return true;
-			else
-				return false;
+			return coordinate >= 0;
 		} catch (NumberFormatException | NullPointerException nfe) {
 			return false;
 		}
@@ -45,10 +36,7 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 	public boolean hasValuesIncludedInDefaultValues(String param, List<String> defaultValues) {
 		if (param.length() > 0) {
 			long count = Arrays.stream(param.split("")).filter(s -> defaultValues.contains(s)).count();
-			if (count == param.length())
-				return true;
-			else
-				return false;
+			return count == param.length();
 		} else {
 			return false;
 		}
@@ -56,10 +44,7 @@ public class VerifyParametersServiceImpl implements VerifyParametersService {
 
 	@Override
 	public boolean isNotEmptyString(String param) {
-		if (param.length() > 0)
-			return true;
-		else
-			return false;
+		return param.length() > 0;
 	}
 
 }

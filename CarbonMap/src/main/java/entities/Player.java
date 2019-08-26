@@ -16,7 +16,7 @@ package entities;
 import constants.MapConstants;
 
 /**
- * 
+ * Class contenant les aventuriers
  *
  * @author Antoine Janvrot
  * @version 23 août 2019
@@ -28,6 +28,22 @@ public class Player extends MapObject {
 	private String movements;
 	private int treasuresFound;
 
+	/**
+	 * Constructeur avec paramètres
+	 * 
+	 * @param xPos
+	 *            Les coordonnées en abscisse
+	 * @param yPos
+	 *            Les coordonnées en ordonnée
+	 * @param name
+	 *            Le nom de l'aventurier
+	 * @param orientation
+	 *            L'orientation de l'aventurier
+	 * @param movements
+	 *            La suite de mouvements de l'aventurier
+	 * @param treasuresFound
+	 *            Le nombre de trésors trouvés par l'aventurier
+	 */
 	public Player(int xPos, int ypos, String name, String orientation, String movements, int treasuresFound) {
 		this.xPos = xPos;
 		this.yPos = ypos;
@@ -37,30 +53,48 @@ public class Player extends MapObject {
 		this.treasuresFound = treasuresFound;
 	}
 
+	/**
+	 * Constructeur sans paramètres
+	 */
 	public Player() {
 
 	}
 
+	/**
+	 * Change l'orientation de l'aventurier
+	 *
+	 * @param orientation
+	 *            L'orientation initiale
+	 * @param movement
+	 *            Le mouvement prévu
+	 */
 	public void turn(String orientation, String movement) {
 		int position = getOrientationPosition(orientation);
 		if (movement.equals("D")) {
 			position++;
 		} else {
-			position --;
+			position--;
 		}
-		orientation = checkOrientation(position);
+		String futureOrientation = checkOrientation(position);
+		this.orientation = futureOrientation;
 	}
 
+	/**
+	 * Change les coordonnées de l'aventurier de 1 case
+	 *
+	 * @param orientation
+	 *            L'orientation de l'aventurier
+	 */
 	public void move(String orientation) {
 		switch (orientation) {
 		case "N":
-			yPos = yPos + 1;
+			yPos = yPos - 1;
 			break;
 		case "E":
 			xPos = xPos + 1;
 			break;
 		case "S":
-			yPos = yPos - 1;
+			yPos = yPos + 1;
 			break;
 		case "W":
 			xPos = xPos - 1;
@@ -70,22 +104,33 @@ public class Player extends MapObject {
 		}
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public MapObject verifyParamsAndReturnObject(String[] params) {
-		if (verifyParameters.checkNumberParameters(6, params) && verifyParameters.isNotEmptyString(params[1])
-				&& verifyParameters.isNumericAndPositive(params[2])
-				&& verifyParameters.isNumericAndPositive(params[3])
-				&& verifyParameters.hasValuesIncludedInDefaultValues(params[4], MapConstants.ORIENTATIONS)
-				&& verifyParameters.hasValuesIncludedInDefaultValues(params[5], MapConstants.MOVEMENTS))
+		if (getVerifyParameters().checkNumberParameters(6, params) && getVerifyParameters().isNotEmptyString(params[1])
+				&& getVerifyParameters().isNumericAndPositive(params[2])
+				&& getVerifyParameters().isNumericAndPositive(params[3])
+				&& getVerifyParameters().hasValuesIncludedInDefaultValues(params[4], MapConstants.ORIENTATIONS)
+				&& getVerifyParameters().hasValuesIncludedInDefaultValues(params[5], MapConstants.MOVEMENTS))
 			return new Player(Integer.parseInt(params[2]), Integer.parseInt(params[3]), params[1], params[4], params[5],
 					0);
 		else
 			return null;
 	}
-	
+
+	/**
+	 * Récupération de l'orientation de puis le tableau d'orientations
+	 *
+	 * @param orientation
+	 *            L'orientation initiale
+	 * @return La position de l'orientation dans le tableau
+	 */
 	private int getOrientationPosition(String orientation) {
 		int position = 0;
-		for(int i = 0;i<MapConstants.ORIENTATIONS.size();i++) {
+		for (int i = 0; i < MapConstants.ORIENTATIONS.size(); i++) {
 			if (MapConstants.ORIENTATIONS.get(i).equals(orientation)) {
 				position = i;
 				break;
@@ -93,7 +138,14 @@ public class Player extends MapObject {
 		}
 		return position;
 	}
-	
+
+	/**
+	 * Attribue la nouvelle orientation
+	 *
+	 * @param position
+	 *            La position de l'orientation dans le tableau
+	 * @return La nouvelle orienbtation
+	 */
 	private String checkOrientation(int position) {
 		if (position >= MapConstants.ORIENTATIONS.size()) {
 			return MapConstants.ORIENTATIONS.get(0);
@@ -103,9 +155,42 @@ public class Player extends MapObject {
 			return MapConstants.ORIENTATIONS.get(position);
 		}
 	}
-	
+
+	/**
+	 * @return {@link #movements}
+	 */
 	public String getMovements() {
 		return movements;
 	}
 
+	/**
+	 * @return {@link #orientation}
+	 */
+	public String getOrientation() {
+		return orientation;
+	}
+
+	/**
+	 * Ajoute 1 aux trésors de l'aventurier
+	 */
+	public void addTreasure() {
+		treasuresFound = treasuresFound + 1;
+	}
+
+	/**
+	 * @param orientation
+	 *            {@link #orientation}
+	 */
+	public void setOrientation(String orientation) {
+		this.orientation = orientation;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "A - " + name + " - " + xPos + " - " + yPos + " - " + orientation + " - " + treasuresFound + "\r\n";
+	}
 }

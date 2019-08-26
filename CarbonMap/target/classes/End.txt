@@ -1,9 +1,5 @@
-# {C comme carte} - {Axe horizontal} - {Axe vertical} 
 C - 3 - 4
-# {M comme montagne} - {Axe horizontal} - {Axe vertical} 
 M - 1 - 0
 M - 2 - 1
-# {T comme Tresor} - {Axe horizontal} - {Axe vertical} - {Nb. de tresors restants}
 T - 1 - 3 - 2
-# {A comme Aventurier} - {Nom de l'aventurier} - {Axe horizontal} - {Axe vertical} - {Orientation} - {Nb. tresors ramasses}
-A - Lara - 0 - 3 - S - 3
+A - LARA - 0 - 3 - S - 3

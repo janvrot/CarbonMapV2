@@ -1,29 +1,33 @@
-package utils;
+package services.impl;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import entities.Game;
 import entities.Map;
 import entities.MapObject;
 import entities.Mountain;
 import entities.Player;
 import entities.Treasure;
 import exception.MapException;
+import services.CheckIfAllGoodService;
+import utils.Game;
 
-public class CheckIfAllIsGood {
+public class CheckIfAllIsGoodServiceImpl implements CheckIfAllGoodService {
 
+	@Override
 	public Game getFinalList(List<MapObject> objects) throws MapException {
 		Map map = extractMap(objects);
 		if (map != null) {
 			List<MapObject> finalMap = checkIfIsInMap(map, objects);
 			if (!finalMap.isEmpty()) {
 				return new Game(map, extractMountains(finalMap), extractTreasures(finalMap), extractPlayers(finalMap));
-			} else
+			} else {
 				throw new MapException("Il manque des elements pour demarrer la partie");
-		} else
+			}
+		} else {
 			throw new MapException("Il n'y a pas de donnees de carte");
+		}
 	}
 
 	private Map extractMap(List<MapObject> objects) {
@@ -34,37 +38,48 @@ public class CheckIfAllIsGood {
 
 	private List<Player> extractPlayers(List<MapObject> objects) {
 
-		return objects.stream().filter(player -> player instanceof Player).map(player -> (Player) player)
-				.collect(Collectors.toList());
+		return objects.stream().filter(player -> player instanceof Player).map(player -> (Player) player).collect(
+				Collectors.toList());
 
 	}
 
 	private List<Mountain> extractMountains(List<MapObject> objects) {
 
-		return objects.stream().filter(mountain -> mountain instanceof Mountain).map(mountain -> (Mountain) mountain)
-				.collect(Collectors.toList());
+		return objects.stream().filter(mountain -> mountain instanceof Mountain).map(
+				mountain -> (Mountain) mountain).collect(Collectors.toList());
 
 	}
 
 	private List<Treasure> extractTreasures(List<MapObject> objects) {
 
-		return objects.stream().filter(treasure -> treasure instanceof Treasure).map(treasure -> (Treasure) treasure)
-				.collect(Collectors.toList());
+		return objects.stream().filter(treasure -> treasure instanceof Treasure).map(
+				treasure -> (Treasure) treasure).collect(Collectors.toList());
 
 	}
 
 	private List<MapObject> checkIfIsInMap(Map map, List<MapObject> mapObjects) {
 
-		List<MapObject> objects = mapObjects.stream().filter(mapObject -> !(mapObject instanceof Map))
-				.filter(mapObject -> mapObject.getxPos() < map.getxPos() && mapObject.getyPos() < map.getyPos())
-				.collect(Collectors.toList());
+		List<MapObject> objects = mapObjects.stream().filter(mapObject -> !(mapObject instanceof Map)).filter(
+				mapObject -> mapObject.getxPos() < map.getxPos() && mapObject.getyPos() < map.getyPos()).collect(
+						Collectors.toList());
 
-		if (containsPlayersAndTreasures(objects)) {
+		if (containsPlayersAndTreasures(objects) && !checkIfStartAtTheSamePoint(objects)) {
 			return objects;
 		} else {
 			return Collections.emptyList();
 		}
+	}
 
+	private boolean checkIfStartAtTheSamePoint(List<MapObject> objects) {
+		boolean result = false;
+		for (MapObject mapObject : objects) {
+			if (objects.stream().filter(object -> object.getxPos() == mapObject.getxPos()
+					&& object.getyPos() == mapObject.getyPos()).filter(object -> object != mapObject).count() > 0) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	private boolean containsPlayersAndTreasures(List<MapObject> objects) {

@@ -1,15 +1,23 @@
 package utils;
 
 import constants.MapConstants;
-import entities.Game;
 import exception.MapException;
+import services.CheckIfAllGoodService;
+import services.ExtractElementsFromFileService;
+import services.WriteExitService;
+import services.impl.CheckIfAllIsGoodServiceImpl;
+import services.impl.ExtractElementsFromFileServiceImpl;
+import services.impl.WriteExitServiceImpl;
 
 public class App
 {	
-	private static CheckIfAllIsGood parameters = new CheckIfAllIsGood();
+	private static CheckIfAllGoodService parameters = new CheckIfAllIsGoodServiceImpl();
+	private static WriteExitService writeExit = new WriteExitServiceImpl();
+	private static ExtractElementsFromFileService mapObjects = new ExtractElementsFromFileServiceImpl();
 	
 	public static void main(String[] args) throws MapException {
-		Game game = parameters.getFinalList(ExtractElementsFromFile.getMapObjectsFromFile(MapConstants.DEFAULT_FILE_PATH));
-		System.out.println(game);
+		Game game = parameters.getFinalList(mapObjects.getMapObjectsFromFile(MapConstants.DEFAULT_FILE_PATH));
+		game.playGame();
+		writeExit.generateExitFile(game);
 	}
 }

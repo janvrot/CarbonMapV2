@@ -11,7 +11,7 @@
  * Créé le 23 août 2019.
  * </p>
  */
-package utils;
+package services.impl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,8 +26,9 @@ import entities.Mountain;
 import entities.Player;
 import entities.Treasure;
 import exception.MapException;
+import services.ExtractElementsFromFileService;
 
-public final class ExtractElementsFromFile {
+public final class ExtractElementsFromFileServiceImpl implements ExtractElementsFromFileService {
 
 	/**
 	 * Récupère les lignes du fichier texte et les stocke dans une liste
@@ -35,7 +36,7 @@ public final class ExtractElementsFromFile {
 	 * @return La liste contenant les lignes du fichier
 	 * @throws MapException
 	 */
-	private static List<String> extractFileLinesWithoutSpaces(String filePath) throws MapException {
+	private List<String> extractFileLinesWithoutSpaces(String filePath) throws MapException {
 		List<String> lines = new ArrayList<>();
 		try (FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr);) {
 			String line = null;
@@ -49,7 +50,8 @@ public final class ExtractElementsFromFile {
 		return lines;
 	}
 
-	public static List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
+	@Override
+	public List<MapObject> getMapObjectsFromFile(String filePath) throws MapException {
 
 		List<MapObject> mapObjects = new ArrayList<>();
 		List<String> mapLines = extractFileLinesWithoutSpaces(filePath);
@@ -63,7 +65,7 @@ public final class ExtractElementsFromFile {
 		return mapObjects;
 	}
 
-	private static MapObject getMapObject(String line) {
+	private MapObject getMapObject(String line) {
 
 		String[] params = line.split("-");
 		if (MapConstants.OBJECTS_IDENTIFIER.contains(params[0]) && null != getMapObjectTypeFromKey(params)) {
@@ -73,7 +75,7 @@ public final class ExtractElementsFromFile {
 		}
 	}
 
-	private static MapObject getMapObjectTypeFromKey(String[] params) {
+	private MapObject getMapObjectTypeFromKey(String[] params) {
 		switch (params[0]) {
 		case "C":
 			return new Map().verifyParamsAndReturnObject(params);
